@@ -10,11 +10,6 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-
-Route::get('/redirect-to-foodpanda', function () {
     $user = Auth::user();
 
     $token = Crypt::encrypt([
@@ -22,9 +17,22 @@ Route::get('/redirect-to-foodpanda', function () {
         'timestamp' => now()->toDateTimeString(),
     ]);
 
-    return redirect('http://foodpanda.local:8001/sso-login?token=' . urlencode($token));
-});
+    $ssoUrl = 'http://foodpanda.local:8001/sso-login?token=' . urlencode($token);
 
+    return view('dashboard', compact('ssoUrl'));
+})->middleware(['auth'])->name('dashboard');
+
+
+// Route::get('/redirect-to-foodpanda', function () {
+//     $user = Auth::user();
+
+//     $token = Crypt::encrypt([
+//         'email' => $user->email,
+//         'timestamp' => now()->toDateTimeString(),
+//     ]);
+
+//     return redirect('http://foodpanda.local:8001/sso-login?token=' . urlencode($token));
+// });
 
 
 Route::middleware('auth')->group(function () {

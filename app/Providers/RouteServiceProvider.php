@@ -14,8 +14,8 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const HOME = '/redirect-to-foodpanda'; //  redirect route
-
+    // public const HOME = '/redirect-to-foodpanda';
+    public const HOME = '/dashboard';
     /**
      * Define your route model bindings, pattern filters, etc.
      */
