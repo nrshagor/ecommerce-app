@@ -25,3 +25,12 @@
         </div>
     </div>
 </x-app-layout>
+
+<script>
+    function openFoodpanda() {
+        const popup = window.open("{{ $ssoUrl }}", "_blank");
+        if (!popup || popup.closed || typeof popup.closed == 'undefined') {
+            alert("Popup blocked! Please allow popups for this site.");
+        }
+    }
+</script>
