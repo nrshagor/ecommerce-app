@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 
 Route::get('/', function () {
     return view('welcome');
@@ -33,7 +34,16 @@ Route::get('/dashboard', function () {
 
 //     return redirect('http://foodpanda.local:8001/sso-login?token=' . urlencode($token));
 // });
+Route::post('/logout', function (Request $request) {
+    Auth::logout();
+    $request->session()->invalidate();
+    $request->session()->regenerateToken();
 
+    return redirect('/logged-out');
+})->name('logout');
+Route::get('/logged-out', function () {
+    return view('logged-out');
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

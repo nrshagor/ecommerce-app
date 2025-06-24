@@ -43,13 +43,6 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-        try {
-            Http::withCookies($request->cookies->all(), 'foodpanda.local')
-                ->post('http://foodpanda.local:8001/sso-logout');
-        } catch (\Exception $e) {
-            // 
-        }
-
-        return redirect('/');
+        return redirect('/logged-out');
     }
 }
