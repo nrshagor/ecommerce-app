@@ -8,6 +8,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Http;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -41,6 +42,13 @@ class AuthenticatedSessionController extends Controller
         $request->session()->invalidate();
 
         $request->session()->regenerateToken();
+
+        try {
+            Http::withCookies($request->cookies->all(), 'foodpanda.local')
+                ->post('http://foodpanda.local:8001/sso-logout');
+        } catch (\Exception $e) {
+            // 
+        }
 
         return redirect('/');
     }
