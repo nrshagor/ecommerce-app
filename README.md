@@ -94,21 +94,20 @@ C:\Windows\System32\drivers\etc\hosts
 ### 🔐 Auth & SSO
 
 -   When user logs in here, the app generates a token and opens foodpanda-app in a new tab.
-
 -   The session cookie shared_session is used to maintain login state across both apps.
 
 ### ✅ Features
 
 -   Login / Register
-
 -   Dashboard with Go to Foodpanda button
-
 -   Shared SSO session
-
 -   Logout from both systems
 
 ### 🧪 Testing
 
 -   Login at: http://ecommerce.local:8000/login
-
 -   Dashboard auto-opens foodpanda login via secure SSO
+
+### 📂 Related App
+
+Be sure to set up Foodpanda App alongside this.
