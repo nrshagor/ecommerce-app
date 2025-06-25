@@ -24,16 +24,6 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 
-// Route::get('/redirect-to-foodpanda', function () {
-//     $user = Auth::user();
-
-//     $token = Crypt::encrypt([
-//         'email' => $user->email,
-//         'timestamp' => now()->toDateTimeString(),
-//     ]);
-
-//     return redirect('http://foodpanda.local:8001/sso-login?token=' . urlencode($token));
-// });
 Route::post('/logout', function (Request $request) {
     Auth::logout();
     $request->session()->invalidate();
